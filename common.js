@@ -1,5 +1,5 @@
 var getPrefix = function() {
-    return "oogi$"
+    return ""
 };
 
 var processCookieStr = function(cookiesStr) {

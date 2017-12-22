@@ -6,7 +6,8 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
             }
         });
         return {
-            requestHeaders: details.requestHeaders
+            cancel: details.url.indexOf("pay_iframe.html") != -1 
+           //  requestHeaders: details.requestHeaders
         };
     }, {
         urls: [ "*://*/*" ]
@@ -18,6 +19,7 @@ chrome.webRequest.onHeadersReceived.addListener(
         details.responseHeaders.forEach(function(responseHeader){
             if (responseHeader.name.toLowerCase() === "set-cookie") {
                 responseHeader.value = processSetCookieStr(responseHeader.value);
+                console.log(`${details.url} sets cookie: ${responseHeader.value}`);
             }
         });
         return {
